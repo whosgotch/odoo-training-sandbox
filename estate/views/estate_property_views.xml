@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <record id="estate_property_offer_view_form" model="ir.ui.view">
+        <field name="name">estate.property.offer.form</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="price"/>
+                    <field name="partner_id"/>
+                    <field name="status"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="estate_property_offer_view_tree" model="ir.ui.view">
+        <field name="name">estate.property.offer.tree</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="price"/>
+                <field name="partner_id"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
     <record id="estate_property_view_search" model="ir.ui.view">
         <field name="name">estate.property.search</field>
         <field name="model">estate.property</field>
@@ -54,12 +81,16 @@
                                 <field name="garden_orientation" />
                             </group>
                         </page>
+                        <page string="Offers">
+                                <field name="offer_ids"/>
+                        </page>
                         <page string="Other Info">
                             <group>
                                 <field name="salesperson_id"/>
                                 <field name="buyer_id"/>
                             </group>
                         </page>
+
                     </notebook>
                 </sheet>
             </form>
@@ -85,6 +116,7 @@
     </record>
 
 
+
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Real Estate</field>
         <field name="res_model">estate.property</field>
@@ -100,4 +132,6 @@
         <field name="res_model">estate.property.tag</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+
 </odoo>
