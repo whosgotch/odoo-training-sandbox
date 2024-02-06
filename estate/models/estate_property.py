@@ -35,4 +35,7 @@ class EstateProperty(models.Model):
   @api.depends("offer_ids.price")
   def _compute_best_price(self):
     for line in self:
-      line.best_price = max(line.mapped("offer_ids.price"))
+        if line.offer_ids:
+          line.best_price = max(line.mapped("offer_ids.price")) or 0
+        else:
+          line.best_price = 0
