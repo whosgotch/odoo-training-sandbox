@@ -70,7 +70,7 @@
                         <field name="name"/>
 
                     </h1>
-                    <field name="tags_ids" widget="many2many_tags" class="mb32"/>
+                    <field name="tags_ids" widget="many2many_tags" class="mb32" options="{'no_create': true, 'color_field': 'color'}"/>
                     <group>
                         <group>
                             <field name="property_type_id" string="Property Type"/>
