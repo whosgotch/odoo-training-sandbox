@@ -21,15 +21,14 @@
         <field name="name">estate.property.offer.tree</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-success="status == 'accepted'" decoration-danger="status == 'refused'">
                 <field name="price"/>
                 <field name="partner_id"/>
-                <field name="status"/>
                 <field name="validity" string="Validity (days)"/>
                 <field name="date_deadline" string="Deadline"/>
                 <button name="action_accept" type="object" icon="fa-check" invisible="status"/>
                 <button name="action_refuse" type="object" icon="fa-times" invisible="status"/>
-                <field name="status"/>
+                <field name="status" string="" invisible="1"/>
             </tree>
         </field>
     </record>
@@ -117,16 +116,17 @@
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="Estate">
+            <tree string="Estate" decoration-success="state == 'offer received' or state == 'offer accepted'" decoration-bf="state == 'offer accepted'" decoration-muted="state == 'sold'">
                 <field name="name" string="Title" />
                 <field name="postcode" />
                 <field name="bedrooms" />
                 <field name="living_area" string="Living Are (sqm)" />
                 <field name="expected_price" />
                 <field name="selling_price" />
-                <field name="date_availability" string="Available From" />
+                <field name="date_availability" string="Available From" optional="hide"/>
                 <field name="property_type_id" string="Property Type"/>
                 <field name="tags_ids" widget="many2many_tags"/>
+                <field name="state" invisible="1" string=""/>
             </tree>
         </field>
     </record>
@@ -166,6 +166,16 @@
         </field>
     </record>
 
+    <record id="estate_property_tag_view_tree" model="ir.ui.view">
+        <field name="name">estate.property.tag.tree</field>
+        <field name="model">estate.property.tag</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="color"/>
+            </tree>
+        </field>
+    </record>
 
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Real Estate</field>
