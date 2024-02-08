@@ -28,9 +28,9 @@ class EstatePropertyType(models.Model):
         
         for offer in offers:
             property_type_id = offer.property_type_id.id
-            # if property_type_id not in offer_count:
-            #     offer_count[property_type_id] = 0
-            #     offer_ids[property_type_id] = []
+            if property_type_id not in offer_count:
+                offer_count[property_type_id] = 0
+                offer_ids[property_type_id] = []
             offer_count[property_type_id] += 1
             offer_ids[property_type_id].append(offer.id)
             
