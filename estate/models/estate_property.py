@@ -30,6 +30,7 @@ class EstateProperty(models.Model):
   total_area = fields.Integer(compute="_compute_total_area")
   best_price = fields.Integer(compute="_compute_best_price")
 
+
   _sql_constraints = [
     ('check_expected_price', 'CHECK(expected_price > 0)', 'Expected price of property must be positive.'),
     ('check_selling_price', 'CHECK(selling_price >= 0)', 'Selling price of property must be positive.')
@@ -77,3 +78,9 @@ class EstateProperty(models.Model):
     for line in self:
       if not float_is_zero(line.selling_price, precision_rounding=0.01) and float_compare(line.selling_price, (line.expected_price / 100 * 90), precision_rounding=0.01) < 0:
         raise ValidationError("Selling price cannot be lower than 90% of the expected price.") 
+      
+  def unlink(self):
+    for i in self:
+      if i.state not in ("canceled", "new"):
+        raise UserError("Only new and canceled properties can be deleted.")
+      return super().unlink()

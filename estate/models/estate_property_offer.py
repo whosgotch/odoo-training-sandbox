@@ -46,3 +46,10 @@ class EstatePropertyOffer(models.Model):
             record.property_id.selling_price = 0
             record.property_id.buyer_id = ""
 
+    @api.model
+    def create(self, vals):
+        if vals.get("property_id"):
+            prop = self.env["estate.property"].browse(vals["property_id"])
+            prop.state = "offer received"
+        return super().create(vals)
+    
