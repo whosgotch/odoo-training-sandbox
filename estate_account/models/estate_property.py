@@ -2,8 +2,10 @@ from odoo import models, fields, Command
 
 
 class EstateProperty(models.Model):
-    _inherit = "estate.property"
+    # Private fields
+    _inherit = "estate.property"    
 
+    # Action methods
     def action_sell_property(self):
         res = super().action_sell_property()
         for prop in self:
