@@ -1,10 +1,11 @@
 from odoo import models, fields, Command
 
+
 class EstateProperty(models.Model):
     _inherit = "estate.property"
 
     def action_sell_property(self):
-        res =  super().action_sell_property()
+        res = super().action_sell_property()
         for prop in self:
             self.env["account.move"].create(
                 {
